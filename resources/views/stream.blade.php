@@ -63,7 +63,7 @@
         methods: {
             getEvents() {
                 // trigger event
-                axios.post('/streamer/getLatestEvents',{
+                axios.post({!! json_encode(url('/')) !!}+'/streamer/getLatestEvents',{
                     stream_id: '{{$streamer_id}}'
                 })
                     .then((response) => {
