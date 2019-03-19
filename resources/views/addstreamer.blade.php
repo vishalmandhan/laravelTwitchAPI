@@ -15,7 +15,7 @@
 </head>
 <body>
 
-    <form action="/streamer/favorite" method="post">
+    <form action=<?=url('/streamer/favorite') ?> method="post">
     <input type="text" name="twitch_streamer" placeholder="Enter favorite streamer name" />
 
         @csrf
