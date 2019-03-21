@@ -69,3 +69,22 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Deploy on AWS
+For deployment of this application, I purpose to use elastic beanstalk. With beanstalk, we will release new versions of application, and we can also do the scaling of infrastructure against parameters such as CPU utilization, latency etc. We will also be able to select the deployment strategy with beanstalk from rolling update, all at once updates etc.
+
+We will be launching the application in private subnet on aws, so this can not be accessed directly from internet. Our load balancer on the aws will be launched in the public subnet and will forward the traffic to the pool of ec2 in the private subnet.
+
+
+Internet -> LoadBalancer -> |Pool of ec2|
+
+                            |
+                            |
+                            |
+                            | trigger for autoscaling |
+                            
+## Bottlenecks
+If we are going to have 100 or more containers the updating our application on rolling update will be one of the bottleneck that we can reduce it by batch update deployment strategy.
+
+## Application scalling approach
+Right now we are using application load balancer, if our objective is to handle 900MM req/day over 6 months then we should be using network load balancer as it is optimized to provide low latency to the end users; With load balancer, we can  forward traffic to the servers in different availability zones to avoid to any possible down-time in case something happens at any availability zone (data center)
